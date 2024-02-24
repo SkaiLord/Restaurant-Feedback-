@@ -201,7 +201,7 @@ export default function Home() {
                 key={star}
                 xmlns="http://www.w3.org/2000/svg"
                 className={`${
-                  overallRating != 0 && star < overallRating
+                  overallRating != 0 && star <= overallRating
                     ? `transition ease-in-out fill-golden`
                     : 'fill-none'
                 } md:h-7 md:w-7 sm:w-6 sm:h-6 w-5 h-5 bg-cream text-dark-red hover:fill-golden transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 cursor-pointer`}
