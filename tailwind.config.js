@@ -8,6 +8,11 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        // kerala
+        'dark-olive': '#12372A',
+        'light-olive': '#436850',
+        'pastel-green': '#ADBC9F',
+        // punjab
         cream: '#F9DEC9',
         rose: '#F78CA2',
         'dark-red': '#D80032',

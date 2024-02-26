@@ -13,7 +13,7 @@ import {
 } from 'react-icons/bs';
 import { useRouter } from 'next/navigation';
 
-export default function Home() {
+export default function Punjab() {
   const [foodRating, setFoodRating] = useState(0);
   const [serviceRating, setServiceRating] = useState(0);
   const [ambienceRating, setAmbienceRating] = useState(0);
@@ -234,21 +234,23 @@ export default function Home() {
           </button>
         </div>
       </div>
-      <div className="md:col-span-3 grid grid-cols-2 items-end">
-        <Image
-          src={truck}
-          alt="dhol"
-          width={800}
-          height={500}
-          className="md:w-full md:col-span-2 col-span-1"
-        />
-        <div className="md:hidden w-full flex justify-center">
+      <div className="md:col-span-3 flex items-end md:px-0 px-4 gap-x-4">
+        <div className="md:h-full h-3/4">
+          <Image
+            src={truck}
+            alt="truck"
+            width={300}
+            height={300}
+            className="md:h-auto h-full w-auto"
+          />
+        </div>
+        <div className="md:hidden h-3/5 flex justify-center">
           <Image
             src={dhol}
             alt="dhol"
             width={100}
             height={100}
-            className="col-span-1"
+            className="w-auto h-full"
           />
         </div>
       </div>
