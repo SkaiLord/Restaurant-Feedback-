@@ -12,6 +12,7 @@ import {
   BsEmojiSmile,
 } from 'react-icons/bs';
 import { useRouter } from 'next/navigation';
+import { supabaseClient } from '@/utils/supabaseClient';
 
 export default function Kerala() {
   const [foodRating, setFoodRating] = useState(0);
@@ -26,16 +27,25 @@ export default function Kerala() {
     setComment(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // Here you can handle form submission, e.g., send the data to a backend server
-    console.log({
-      foodRating,
-      serviceRating,
-      ambienceRating,
-      overallRating,
-      comment,
-    });
+    // or use a Supabase client to save the data to a database
+    const insertData = {
+      cat: 'kerala',
+      ...(foodRating !== 0 && { food: foodRating }),
+      ...(serviceRating !== 0 && { service: serviceRating }),
+      ...(overallRating !== 0 && { overall: overallRating }),
+      ...(ambienceRating !== 0 && { ambience: ambienceRating }),
+      ...(comment.length !== 0 && { comment: comment }),
+    };
+    // console.log(insertData);
+    const { error } = await supabaseClient
+      .from('reviews')
+      .insert(insertData)
+      .single();
+    if (error) console.log(object);
+    router.push('/submit');
   };
   return (
     <main className="flex min-h-screen w-full md:grid md:grid-cols-10 flex-col items-center gap-4 p-4 sm:p-8 bg-pastel-green text-dark-olive">
@@ -234,7 +244,7 @@ export default function Kerala() {
           />
           <button
             className="w-fit px-6 py-1.5 rounded-xl border border-dark-olive bg-transparent text-lg font-medium hover:bg-dark-olive hover:text-[#EFEFEF]"
-            onClick={() => router.push('/submit')}
+            onClick={handleSubmit}
           >
             Submit
           </button>

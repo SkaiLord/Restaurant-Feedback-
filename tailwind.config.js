@@ -18,6 +18,11 @@ module.exports = {
         'dark-red': '#D80032',
         brown: '#3D0C11',
         golden: '#F8DE22',
+        // reviews
+        cavity: '#F2F7A1',
+        'sea-green': '#35A29F',
+        'ice-blue': '#8ECDDD',
+        navy: '#071952',
       },
     },
     screens: {
