@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { supabaseClient } from '@/utils/supabaseClient';
+import { readReviews } from '../actions';
 
 export default async function Reviews() {
   const headers = [
@@ -27,9 +28,11 @@ export default async function Reviews() {
     comment: 'Good food and service',
   };
 
-  const { data: reviews, error } = await supabaseClient
-    .from('reviews')
-    .select();
+  const { data: reviews, error } = await readReviews();
+  if (error) {
+    console.log(error);
+    return <div>{error}</div>;
+  }
   // console.log(reviews);
 
   return (
@@ -56,8 +59,7 @@ export default async function Reviews() {
         </div>
         {/* Table reviews */}
         <div className="flex flex-col w-full divide-y-2 divide-navy">
-          {!error &&
-            reviews &&
+          {reviews &&
             reviews.map((item, index) => (
               <div
                 key={index}

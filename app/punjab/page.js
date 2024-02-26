@@ -13,6 +13,7 @@ import {
 } from 'react-icons/bs';
 import { useRouter } from 'next/navigation';
 import { supabaseClient } from '@/utils/supabaseClient';
+import { createReview } from '../actions';
 
 export default function Punjab() {
   const [foodRating, setFoodRating] = useState(0);
@@ -40,12 +41,9 @@ export default function Punjab() {
       ...(comment.length !== 0 && { comment: comment }),
     };
     // console.log(insertData);
-    const { error } = await supabaseClient
-      .from('reviews')
-      .insert(insertData)
-      .single();
-    if (error) console.log(object);
-    router.push('/submit');
+    const { error } = await createReview(insertData);
+    console.log(error);
+    if (!error) router.push('/submit');
   };
   return (
     <main className="flex min-h-screen w-full md:grid md:grid-cols-10 flex-col items-center gap-4 p-4 sm:p-8 bg-cream text-dark-red">
@@ -235,6 +233,7 @@ export default function Punjab() {
           <textarea
             className="w-full h-32 border border-gray-300 rounded p-2"
             placeholder="Leave a comment..."
+            onChange={handleCommentChange}
           />
           <button
             className="w-fit px-6 py-1.5 rounded-xl border border-dark-red bg-transparent text-lg font-medium hover:bg-dark-red hover:text-[#EFEFEF]"
